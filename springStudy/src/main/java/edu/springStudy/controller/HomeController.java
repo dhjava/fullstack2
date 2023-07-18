@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import edu.springStudy.vo.UserVO;
+
 /**
  * Handles requests for the application home page.
  */
@@ -55,7 +57,7 @@ public class HomeController {
 		return "ex01";
 	}
 	
-	@RequestMapping(value="/sample.do",method=RequestMethod.POST)
+/*	@RequestMapping(value="/sample.do",method=RequestMethod.POST)
 	public String sample1(String name, String age, String addr, String phone) {
 		System.out.println("name :: " + name);
 		if(age != null && !age.equals("")) {
@@ -65,6 +67,18 @@ public class HomeController {
 		System.out.println("addr :: " + addr);
 		System.out.println("phone :: " + phone);
 		return "";
+	}
+	*/
+	
+	
+	@RequestMapping(value="/sample.do",method=RequestMethod.POST)
+	public String sample1(UserVO userVO) {
+		System.out.println(userVO.getName());
+		System.out.println(userVO.getAge());
+		System.out.println(userVO.getAddr());
+		System.out.println(userVO.getPhone());
+		
+		return "redirect:/board/list.do";
 	}
 	
 }
