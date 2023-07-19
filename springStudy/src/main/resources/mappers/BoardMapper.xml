@@ -9,4 +9,23 @@
 		SELECT * FROM boardtb
 	</select>
 	 
+	<select id="selectOneByBidx" resultType="boardVO" parameterType="int" >
+		SELECT * FROM boardtb WHERE bidx = #{bidx}
+	</select>
+	
+	<update id="update" parameterType="boardVO">
+		UPDATE boardtb
+		   SET title = #{title} <!-- boardVO.getTitle() -->
+			 , body = #{body}
+		 WHERE bidx = #{bidx}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE
+		  FROM boardtb
+		 WHERE bidx = #{bidx}
+	</delete>
+	
+	
+	
 </mapper>

@@ -23,5 +23,22 @@ public class BoardServiceImpl implements BoardService{
 		return boardDAO.list();
 	}
 	
+	// DB에서 쿼리 호출
+	@Override
+	public BoardVO selectOneByBidx(int bidx) {
+		// TODO Auto-generated method stub
+		return boardDAO.selectOneByBidx(bidx);
+	}
+
+	@Override
+	public int update(BoardVO vo) {
+		return boardDAO.update(vo);
+	}
+
+	@Override
+	public int delete(int bidx) {
+		return boardDAO.delete(bidx);
+	}
+	
 	
 }

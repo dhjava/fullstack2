@@ -10,6 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="<%=request.getContextPath() %>/resources.js.jquery-3.6.3.min.js"></script>
 </head>
 <body>
 	<h2>게시글 목록</h2>
@@ -23,7 +24,7 @@
 	<c:forEach items="${list}" var="board">
 		<tr>
 			<td>${board.bidx }</td>
-			<td>${board.title }</td>
+			<td><a href="view.do?bidx=${board.bidx}">${board.title }</a></td>
 			<td>${board.wdate }</td>
 			<td>${board.hit }</td>
 		</tr>

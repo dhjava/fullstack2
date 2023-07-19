@@ -6,4 +6,7 @@ import edu.springStudy.vo.BoardVO;
 
 public interface BoardService {
 	List<BoardVO> list();
+	BoardVO selectOneByBidx(int bidx);
+	int update(BoardVO vo);
+	int delete(int bidx);
 }
