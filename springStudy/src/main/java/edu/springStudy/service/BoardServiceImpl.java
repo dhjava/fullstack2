@@ -40,5 +40,8 @@ public class BoardServiceImpl implements BoardService{
 		return boardDAO.delete(bidx);
 	}
 	
-	
+	@Override
+	public int insert(BoardVO vo) {
+		return boardDAO.insert(vo);
+	}
 }

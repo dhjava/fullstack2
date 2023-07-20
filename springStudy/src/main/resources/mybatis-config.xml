@@ -5,6 +5,7 @@
 
 	<typeAliases>
         <typeAlias type="edu.springStudy.vo.BoardVO" alias="boardVO" />
+        <typeAlias type="edu.springStudy.vo.UserVO" alias="userVO" />
     </typeAliases>
 
 </configuration>

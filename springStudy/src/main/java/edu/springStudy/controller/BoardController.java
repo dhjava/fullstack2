@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.springStudy.service.BoardService;
 import edu.springStudy.vo.BoardVO;
+import edu.springStudy.vo.UserVO;
 
 @RequestMapping(value="/board")
 @Controller
@@ -76,9 +79,18 @@ public class BoardController {
 	}*/
 	
 	@RequestMapping(value="/write.do",method=RequestMethod.POST)
-	public String write(BoardVO boardVO) {
+	public String write(BoardVO boardVO, HttpServletRequest req) {
+		
+		HttpSession session = req.getSession();
+		
+		UserVO loginVO = (UserVO)session.getAttribute("login");
+		
+		boardVO.setId(loginVO.getId());
+		
+		int result = boardService.insert(boardVO);
 		
 		System.out.println(boardVO.toString());
+		
 		return "redirect:list.do"; // board/list.do
 		// return "redirect:/board/list.do"
 	}
