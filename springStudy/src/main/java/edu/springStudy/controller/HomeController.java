@@ -33,7 +33,7 @@ public class HomeController {
 		
 		String formattedDate = dateFormat.format(date);
 		
-		model.addAttribute("serverTime", "¹İ°©½À´Ï´Ù." ); //request.setAttribute()¿Í µ¿ÀÏÇÑ ¿ªÇÒ
+		model.addAttribute("serverTime", "ë°˜ê°‘ìŠµë‹ˆë‹¤." ); //request.setAttribute()ì™€ ë™ì¼í•œ ì—­í• 
 		
 		return "home";
 	}
@@ -41,13 +41,13 @@ public class HomeController {
 	@RequestMapping(value="/sample.do",method=RequestMethod.GET)
 	public String sample( Model model) {
 		
-		String name = "È«±æµ¿";
+		String name = "í™ê¸¸ë™";
 		int age = 20;
-		String addr = "ÀüÁÖ ´öÁø±¸";
+		String addr = "ì „ì£¼ ë•ì§„êµ¬";
 		String phone = "010-1111-1111";
 		
 		/*
-		 À§ Á¤º¸ 4°¡Áö¸¦ ex01.jsp·Î Æ÷¿öµåÇÏ¿© Ãâ·ÂÇÏ¼¼¿ä.
+		 ìœ„ ì •ë³´ 4ê°€ì§€ë¥¼ ex01.jspë¡œ í¬ì›Œë“œí•˜ì—¬ ì¶œë ¥í•˜ì„¸ìš”.
 		 */
 		model.addAttribute("name" , name);
 		model.addAttribute("age"  , age);

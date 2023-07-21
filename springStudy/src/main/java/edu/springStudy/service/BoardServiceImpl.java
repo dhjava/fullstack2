@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import edu.springStudy.dao.BoardDAO;
 import edu.springStudy.vo.BoardVO;
+import edu.springStudy.vo.SearchVO;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -15,12 +16,12 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDAO boardDAO;
 	
 	@Override
-	public List<BoardVO> list() {
+	public List<BoardVO> list(SearchVO searchVO) {
 		
-		//°Ô½Ã±Û ¸ñ·Ï db¿¡¼­ °¡Á®¿À±â
+		//ê²Œì‹œê¸€ ëª©ë¡ dbì—ì„œ ê°€ì ¸ì˜¤ê¸°
 		/* BoardDAO boardDAO = new BoardDAO(); */
 		
-		return boardDAO.list();
+		return boardDAO.list(searchVO);
 	}
 
 	@Override

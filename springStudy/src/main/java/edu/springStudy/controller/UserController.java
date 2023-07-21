@@ -39,27 +39,29 @@ public class UserController {
 		UserVO loginVO = userService.selectUserByLogin(vo);
 		
 		res.setContentType("text/html;charset=UTF-8");
-		PrintWriter pw = res.getWriter();	
+		PrintWriter pw = res.getWriter();
+		
 		/*
-		 °¢ ·Î±×ÀÎ ¿©ºÎ »óÈ²¿¡ ¸Â°Ô »ç¿ëÀÚ¿¡°Ô °æ°íÃ¢À» ¶ç¿ö ¾È³»ÇÏ´Â ±â´ÉÀ» ±¸ÇöÇÏ¼¼¿ä
+		 ê° ë¡œê·¸ì¸ ì—¬ë¶€ ìƒí™©ì— ë§ê²Œ ì‚¬ìš©ìì—ê²Œ ê²½ê³ ì°½ì„ ë„ì›Œ ì•ˆë‚´í•˜ëŠ” ê¸°ëŠ¥ì„ êµ¬í˜„í•˜ì„¸ìš”
 		  
-		 */		
+		 */
+		
 		/*
 		 
-		 °Ô½Ã±Û »ó¼¼ÆäÀÌÁö¿¡¼­ ³»°¡ ¾´ ±ÛÀÎ °æ¿ì¿¡¸¸ °Ô½Ã±Û ¼öÁ¤,»èÁ¦¹öÆ° º¸ÀÌ°Ô ¼öÁ¤ÇÏ¼¼¿ä
+		 ê²Œì‹œê¸€ ìƒì„¸í˜ì´ì§€ì—ì„œ ë‚´ê°€ ì“´ ê¸€ì¸ ê²½ìš°ì—ë§Œ ê²Œì‹œê¸€ ìˆ˜ì •,ì‚­ì œë²„íŠ¼ ë³´ì´ê²Œ ìˆ˜ì •í•˜ì„¸ìš”
 		 
 		 */
 		if(loginVO != null) {
-			//loginÇÒ È¸¿øÀÌ µ¥ÀÌÅÍº£ÀÌ½º¿¡ Á¸Àç
-			System.out.println("È¸¿øÁ¸Àç");
+			//loginí•  íšŒì›ì´ ë°ì´í„°ë² ì´ìŠ¤ì— ì¡´ì¬
+			System.out.println("íšŒì›ì¡´ì¬");
 			
 			session.setAttribute("login", loginVO);
-			pw.append("<script>alert('·Î±×ÀÎ¿¡ ¼º°øÇß½À´Ï´Ù.');location.href='"+req.getContextPath()+"/';</script>");
+			pw.append("<script>alert('ë¡œê·¸ì¸ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤.');location.href='"+req.getContextPath()+"/';</script>");
 			
 		}else {
-			//loginÇÒ È¸¿øÀÌ µ¥ÀÌÅÍº£ÀÌ½º¿¡ Á¸Àç X
-			System.out.println("È¸¿øÁ¸Àç X");
-			pw.append("<script>alert('·Î±×ÀÎ¿¡ ½ÇÆĞÇß½À´Ï´Ù.');location.href='"+req.getContextPath()+"/user/login.do';</script>");
+			//loginí•  íšŒì›ì´ ë°ì´í„°ë² ì´ìŠ¤ì— ì¡´ì¬ X
+			System.out.println("íšŒì›ì¡´ì¬ X");
+			pw.append("<script>alert('ë¡œê·¸ì¸ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.');location.href='"+req.getContextPath()+"/user/login.do';</script>");
 		}
 		
 		pw.flush();
@@ -74,14 +76,14 @@ public class UserController {
 		try {
 			HttpSession session = req.getSession();
 			session.invalidate();
-			
-			pw.append("<script>alert('·Î±×¾Æ¿ô µÇ¾ú½À´Ï´Ù.');"
+			session.setAttribute("key", null);
+			pw.append("<script>alert('ë¡œê·¸ì•„ì›ƒ ë˜ì—ˆìŠµë‹ˆë‹¤.');"
 						+"location.href='"
 					    +req.getContextPath()+"/';</script>");
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-			pw.append("<script>alert('·Î±×¾Æ¿ô½Ã ¿¹¿Ü°¡ ¹ß»ıÇß½À´Ï´Ù.');"
+			pw.append("<script>alert('ë¡œê·¸ì•„ì›ƒì‹œ ì˜ˆì™¸ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤.');"
 					+"location.href='"
 				    +req.getContextPath()+"/';</script>");
 		}

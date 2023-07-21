@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.springStudy.service.BoardService;
 import edu.springStudy.vo.BoardVO;
+import edu.springStudy.vo.SearchVO;
 import edu.springStudy.vo.UserVO;
 
 @RequestMapping(value="/board")
@@ -26,35 +27,35 @@ public class BoardController {
 	private BoardService boardService;
 
 	@RequestMapping(value="/list.do")
-	public String list(Model model) {
+	public String list(Model model,SearchVO searchVO) {
 		/*
 		 * List<String> list = new ArrayList<String>();
 		 * 
-		 * list.add("Ã¹¹øÂ° °Ô½Ã¹°ÀÔ´Ï´Ù."); list.add("µÎ¹øÂ° °Ô½Ã¹°ÀÔ´Ï´Ù."); list.add("¼¼¹øÂ° °Ô½Ã¹°ÀÔ´Ï´Ù.");
-		 * list.add("³×¹øÂ° °Ô½Ã¹°ÀÔ´Ï´Ù.");
+		 * list.add("ì²«ë²ˆì§¸ ê²Œì‹œë¬¼ì…ë‹ˆë‹¤."); list.add("ë‘ë²ˆì§¸ ê²Œì‹œë¬¼ì…ë‹ˆë‹¤."); list.add("ì„¸ë²ˆì§¸ ê²Œì‹œë¬¼ì…ë‹ˆë‹¤.");
+		 * list.add("ë„¤ë²ˆì§¸ ê²Œì‹œë¬¼ì…ë‹ˆë‹¤.");
 		 */
 		/*
-		 À§ list µ¥ÀÌÅÍ¸¦ board/list.jsp·Î Æ÷¿öµåÇÏ¿© Å×ÀÌºí ÇüÅÂ·Î Ãâ·ÂÇÏ¼¼¿ä.
+		 ìœ„ list ë°ì´í„°ë¥¼ board/list.jspë¡œ í¬ì›Œë“œí•˜ì—¬ í…Œì´ë¸” í˜•íƒœë¡œ ì¶œë ¥í•˜ì„¸ìš”.
 		 */
 		
-		List<BoardVO> list = boardService.list();
+		List<BoardVO> list = boardService.list(searchVO);
 		
 		model.addAttribute("list", list);
 		
 		return "board/list";
-		//prefix => WEB-INF/views/[Æ÷¿öµåÇÒ È­¸é °æ·Î].jsp
+		//prefix => WEB-INF/views/[í¬ì›Œë“œí•  í™”ë©´ ê²½ë¡œ].jsp
 		//suffix => jsp
 	}
 	
 	@RequestMapping(value="/view.do")
 	public String view(int bidx,Model model) {
 		
-		//1.È­¸é¿¡¼­ ³Ñ¾î¿À´Â bidx ÃßÃâ
+		//1.í™”ë©´ì—ì„œ ë„˜ì–´ì˜¤ëŠ” bidx ì¶”ì¶œ
 		
-		//2.ÃßÃâÇÑ bidx¸¦ ÀÌ¿ëÇÏ¿© ÀÏÄ¡ÇÏ´Â µ¥ÀÌÅÍ Á¶È¸
+		//2.ì¶”ì¶œí•œ bidxë¥¼ ì´ìš©í•˜ì—¬ ì¼ì¹˜í•˜ëŠ” ë°ì´í„° ì¡°íšŒ
 		BoardVO vo = boardService.selectOneByBidx(bidx);
 		
-		//3.2¹ø µ¥ÀÌÅÍ¸¦ È­¸éÀ¸·Î Àü´Ş 
+		//3.2ë²ˆ ë°ì´í„°ë¥¼ í™”ë©´ìœ¼ë¡œ ì „ë‹¬ 
 		model.addAttribute("vo", vo);
 		
 		return "board/view";
@@ -122,11 +123,11 @@ public class BoardController {
 		int result = boardService.update(vo);
 		
 		if(result>0) {
-			//¼öÁ¤ ¼º°ø
+			//ìˆ˜ì • ì„±ê³µ
 
 			return "redirect:view.do?bidx="+vo.getBidx();
 		}else {
-			//¼öÁ¤½ÇÆĞ
+			//ìˆ˜ì •ì‹¤íŒ¨
 
 			return "redirect:list.do";
 			
@@ -143,9 +144,9 @@ public class BoardController {
 		PrintWriter pw = res.getWriter();
 		
 		if(result>0) {
-			pw.append("<script>alert('»èÁ¦µÇ¾ú½À´Ï´Ù.');location.href='list.do';</script>");
+			pw.append("<script>alert('ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.');location.href='list.do';</script>");
 		}else {
-			pw.append("<script>alert('»èÁ¦µÇÁö ¾Ê¾Ò½À´Ï´Ù.');location.href='list.do';</script>");
+			pw.append("<script>alert('ì‚­ì œë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.');location.href='list.do';</script>");
 		}
 		
 		pw.flush();

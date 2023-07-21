@@ -4,10 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="edu.springStudy.mapper.boardMapper">
-
-	<select id="selectAll" resultType="boardVO">
+	<!-- 
+		파라미터 객체의 필드값을 쿼리에 대입할때는 $기호 말고 #기호를 반드시 써야 합니다.
+	 -->
+	<select id="selectAll" resultType="boardVO" parameterType="searchVO">
 		SELECT *
 		  FROM boardtb
+		 WHERE 1=1
+		<if test='searchType != null and searchType.equals("title")'>
+		   AND title like concat('%', #{searchValue}, '%')
+		</if>
+		<if test='searchType != null and searchType.equals("id")'>
+		   AND id like concat('%', #{searchValue}, '%')
+		</if>
 	</select>
 	
 	<select id="selectOneByBidx" resultType="boardVO" parameterType="int" >

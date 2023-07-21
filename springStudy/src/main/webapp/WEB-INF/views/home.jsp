@@ -47,6 +47,9 @@ ${login.name }님 환영합니다!
 <p>
 	<a href="<%= request.getContextPath() %>/user/list.do">회원 목록으로 이동</a>
 </p>
+<p>
+	<a href="<%=request.getContextPath()%>/ajax/sample.do">ajax 테스트 페이지로 이동</a>
+</p>
 
 
 

@@ -14,5 +14,9 @@
 		   AND password = #{password}
 	</select>
 	
-	
+	<select id="" parameterType="String" resultType="int">
+		select count(id)
+		from usertb
+		where id = ?;
+	</select>
 </mapper>
