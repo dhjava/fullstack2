@@ -22,23 +22,19 @@ import edu.springStudy.vo.UserVO;
 @Controller
 public class BoardController {
 	
-	
 	@Autowired
 	private BoardService boardService;
-	
+
 	@RequestMapping(value="/list.do")
 	public String list(Model model) {
-		
-/*		List<String> list = new ArrayList<String>();
-		
-		list.add("ì²«ë²ˆì§¸ ê²Œì‹œë¬¼ì…ë‹ˆë‹¤.");
-		list.add("ë‘ë²ˆì§¸ ê²Œì‹œë¬¼ì…ë‹ˆë‹¤.");
-		list.add("ì„¸ë²ˆì§¸ ê²Œì‹œë¬¼ì…ë‹ˆë‹¤.");
-		list.add("ë„¤ë²ˆì§¸ ê²Œì‹œë¬¼ì…ë‹ˆë‹¤.");
-*/
-		
 		/*
-		 ìœ„ list ë°ì´í„°ë¥¼ board/list.jspë¡œ í¬ì›Œë“œí•˜ì—¬ í…Œì´ë¸” í˜•íƒœë¡œ ì¶œë ¥í•˜ì„¸ìš”.
+		 * List<String> list = new ArrayList<String>();
+		 * 
+		 * list.add("Ã¹¹øÂ° °Ô½Ã¹°ÀÔ´Ï´Ù."); list.add("µÎ¹øÂ° °Ô½Ã¹°ÀÔ´Ï´Ù."); list.add("¼¼¹øÂ° °Ô½Ã¹°ÀÔ´Ï´Ù.");
+		 * list.add("³×¹øÂ° °Ô½Ã¹°ÀÔ´Ï´Ù.");
+		 */
+		/*
+		 À§ list µ¥ÀÌÅÍ¸¦ board/list.jsp·Î Æ÷¿öµåÇÏ¿© Å×ÀÌºí ÇüÅÂ·Î Ãâ·ÂÇÏ¼¼¿ä.
 		 */
 		
 		List<BoardVO> list = boardService.list();
@@ -46,44 +42,58 @@ public class BoardController {
 		model.addAttribute("list", list);
 		
 		return "board/list";
-		//prefix -> WEB-INF/views/board/list.jsp
-		//suffix -> jsp
+		//prefix => WEB-INF/views/[Æ÷¿öµåÇÒ È­¸é °æ·Î].jsp
+		//suffix => jsp
 	}
 	
 	@RequestMapping(value="/view.do")
-	public String view(int bidx, Model model) {
+	public String view(int bidx,Model model) {
 		
-		//1. í™”ë©´ì—ì„œ ë„˜ì–´ì˜¤ëŠ” bidx ì¶”ì¶œ
+		//1.È­¸é¿¡¼­ ³Ñ¾î¿À´Â bidx ÃßÃâ
 		
-		//2. ì¶”ì¶œí•œ bidxë¥¼ ì´ìš©í•˜ì—¬ ì¼ì¹˜í•˜ëŠ” ë°ì´í„° ì¡°íšŒ
+		//2.ÃßÃâÇÑ bidx¸¦ ÀÌ¿ëÇÏ¿© ÀÏÄ¡ÇÏ´Â µ¥ÀÌÅÍ Á¶È¸
 		BoardVO vo = boardService.selectOneByBidx(bidx);
 		
-		//3. 2ë²ˆ ë°ì´í„°ë¥¼ í™”ë©´ìœ¼ë¡œ ì „ë‹¬
+		//3.2¹ø µ¥ÀÌÅÍ¸¦ È­¸éÀ¸·Î Àü´Ş 
 		model.addAttribute("vo", vo);
 		
 		return "board/view";
 	}
 	
-	// ê¸€ ì“°ê¸°
 	@RequestMapping(value="/write.do",method=RequestMethod.GET)
-	public String write() {
+	public String write(HttpServletRequest req) {
+		
+		HttpSession session = req.getSession();
+		UserVO loginVO = (UserVO)session.getAttribute("login");
+		
+		if(loginVO ==  null) {
+			return "redirect:list.do";
+		}
+		
 		return "board/write";
 	}
-/*	
+	/*
 	@RequestMapping(value="/write.do",method=RequestMethod.POST)
 	public String write(@RequestParam("title")String t, String writer, String body) {
 		
+		System.out.println("title::"+t);
+		System.out.println("writer::"+writer);
+		System.out.println("body::"+body);
 		
 		return "redirect:list.do"; // board/list.do
-		// return "redirect:/board/list.do"
-	}*/
-	
+		//return "redirect:/board/list.do"
+	}
+	*/
 	@RequestMapping(value="/write.do",method=RequestMethod.POST)
-	public String write(BoardVO boardVO, HttpServletRequest req) {
+	public String write(BoardVO boardVO,HttpServletRequest req) {
 		
 		HttpSession session = req.getSession();
 		
 		UserVO loginVO = (UserVO)session.getAttribute("login");
+		
+		if(loginVO ==  null) {
+			return "redirect:list.do";
+		}
 		
 		boardVO.setId(loginVO.getId());
 		
@@ -91,52 +101,41 @@ public class BoardController {
 		
 		System.out.println(boardVO.toString());
 		
-		return "redirect:list.do"; // board/list.do
-		// return "redirect:/board/list.do"
+		return "redirect:view.do?bidx="+boardVO.getBidx();
 	}
 	
-	// ê¸€ ìˆ˜ì •
 	
-/*	@RequestMapping(value="/modify.do",method=RequestMethod.GET)
-	public String modify() {
-		return "board/modify";
-	}
-	
-	@RequestMapping(value="/modify.do",method=RequestMethod.POST)
-	public String modify(BoardVO boardVO) {
-		
-		System.out.println(boardVO.toString());
-		return "redirect:list.do"; // board/list.do
-		// return "redirect:/board/list.do"
-	}
-*/	
 	@RequestMapping(value="/modify.do",method=RequestMethod.GET)
 	public String modify(int bidx, Model model) {
 		
 		BoardVO vo = boardService.selectOneByBidx(bidx);
 		model.addAttribute("vo", vo);
 		
+		
 		return "board/modify";
 	}
 	
-	@RequestMapping(value="/modify.do",method=RequestMethod.POST)
+	@RequestMapping(value="/modify.do", method=RequestMethod.POST)
 	public String modify(BoardVO vo) {
 		
+		System.out.println(vo.toString());
 		int result = boardService.update(vo);
 		
 		if(result>0) {
-			// ìˆ˜ì • ì„±ê³µ
+			//¼öÁ¤ ¼º°ø
+
 			return "redirect:view.do?bidx="+vo.getBidx();
 		}else {
-			// ìˆ˜ì • ì‹¤íŒ¨
-			
+			//¼öÁ¤½ÇÆĞ
+
 			return "redirect:list.do";
+			
 		}
 		
 	}
-	
-	@RequestMapping(value="/delete.do", method=RequestMethod.POST)
+	@RequestMapping(value="/delete.do",method=RequestMethod.POST)
 	public void delete(int bidx,HttpServletResponse res) throws IOException {
+		
 		
 		int result = boardService.delete(bidx);
 		
@@ -144,11 +143,23 @@ public class BoardController {
 		PrintWriter pw = res.getWriter();
 		
 		if(result>0) {
-			pw.append("<script>alert('ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.');loaction.href='list.do';</script>");
+			pw.append("<script>alert('»èÁ¦µÇ¾ú½À´Ï´Ù.');location.href='list.do';</script>");
 		}else {
-			pw.append("<script>alert('ì‚­ì œë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.');loaction.href='list.do';</script>");
+			pw.append("<script>alert('»èÁ¦µÇÁö ¾Ê¾Ò½À´Ï´Ù.');location.href='list.do';</script>");
 		}
 		
 		pw.flush();
 	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+

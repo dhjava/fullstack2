@@ -7,6 +7,13 @@ public class BoardVO {
 	private String body;
 	private int hit;
 	private String id;
+	
+	@Override
+	public String toString() {
+		return "BoardVO [title=" + title + ", bidx=" + bidx + ", wdate=" + wdate + ", body=" + body + ", hit=" + hit
+				+ ", id=" + id + "]";
+	}
+	
 	public String getTitle() {
 		return title;
 	}
@@ -43,11 +50,8 @@ public class BoardVO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	@Override
-	public String toString() {
-		return "BoardVO [title=" + title + ", bidx=" + bidx + ", wdate=" + wdate + ", body=" + body + ", hit=" + hit
-				+ ", id=" + id + "]";
-	}
+	
+	
 	
 	
 }

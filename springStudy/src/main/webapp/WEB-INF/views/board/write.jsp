@@ -1,24 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>°Ô½Ã±Û µî·Ï</h2>
+	<h2>ê²Œì‹œê¸€ ë“±ë¡</h2>
 	<form action="write.do" method="post">
-		Á¦¸ñ : <input type="text" name="title"><br>
-		ÀÛ¼ºÀÚ : <input type="text" name="writer"><br>
-		³»¿ë : <textarea name="body"></textarea><br>
-		<button>µî·Ï</button>
+		ì œëª© : <input type="text" name="title"><br>
+		ìž‘ì„±ìž : <input type="text" name="writer"><br>
+		ë‚´ìš© : <textarea name="body"></textarea><br>
+		<button>ë“±ë¡</button>
 	</form>
-	
 	<!-- 
-		°Ô½Ã±Û ¸ñ·Ï ÆäÀÌÁö¿¡¼­ '°Ô½Ã±Û µî·ÏÇÏ·¯ °¡±â' ¸µÅ© Å¬¸¯ ½Ã ÇØ´çÈ­¸éÀ» Æ÷¿öµå ÇÕ´Ï´Ù.
-		±× ÈÄ °Ô½Ã±ÛÀ» ÀÔ·Â ÈÄ µî·Ï ¹öÆ°À» ´©¸£¸é ÄÜ¼ÖÈ­¸é¿¡ ÀÔ·ÂÇÑ °ªµéÀ» Ãâ·Â ÈÄ
-		´Ù½Ã °Ô½Ã±Û ¸ñ·Ï ÆäÀÌÁö·Î ÀÌµ¿ÇÕ´Ï´Ù.
+		ê²Œì‹œê¸€ ëª©ë¡ íŽ˜ì´ì§€ì—ì„œ 'ê²Œì‹œê¸€ ë“±ë¡í•˜ëŸ¬ ê°€ê¸°' ë§í¬ í´ë¦­ì‹œ í•´ë‹¹ í™”ë©´ì„ í¬ì›Œë“œ í•©ë‹ˆë‹¤.
+		ê·¸ í›„ ê²Œì‹œê¸€ì„ ìž…ë ¥ í›„ ë“±ë¡ ë²„íŠ¼ì„ ëˆ„ë¥´ë©´ ì½˜ì†”í™”ë©´ì— ìž…ë ¥í•œ ê°’ë“¤ì„ ì¶œë ¥ í›„ 
+		ë‹¤ì‹œ ê²Œì‹œê¸€ ëª©ë¡ íŽ˜ì´ì§€ë¡œ ì´ë™í•©ë‹ˆë‹¤.
 		
 	 -->
 </body>

@@ -9,21 +9,20 @@ import edu.springStudy.dao.BoardDAO;
 import edu.springStudy.vo.BoardVO;
 
 @Service
-public class BoardServiceImpl implements BoardService{
-	// BoardServiceì˜ êµ¬í˜„ í´ë˜ìŠ¤
-	
+public class BoardServiceImpl implements BoardService {
+
 	@Autowired
 	private BoardDAO boardDAO;
 	
 	@Override
 	public List<BoardVO> list() {
 		
-		// ê²Œì‹œê¸€ ëª©ë¡ dbì—ì„œ ê°€ì ¸ì˜¤ê¸°
+		//°Ô½Ã±Û ¸ñ·Ï db¿¡¼­ °¡Á®¿À±â
+		/* BoardDAO boardDAO = new BoardDAO(); */
 		
 		return boardDAO.list();
 	}
-	
-	// DBì—ì„œ ì¿¼ë¦¬ í˜¸ì¶œ
+
 	@Override
 	public BoardVO selectOneByBidx(int bidx) {
 		// TODO Auto-generated method stub
@@ -39,9 +38,10 @@ public class BoardServiceImpl implements BoardService{
 	public int delete(int bidx) {
 		return boardDAO.delete(bidx);
 	}
-	
+
 	@Override
 	public int insert(BoardVO vo) {
 		return boardDAO.insert(vo);
 	}
+
 }

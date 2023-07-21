@@ -6,17 +6,20 @@
 <mapper namespace="edu.springStudy.mapper.boardMapper">
 
 	<select id="selectAll" resultType="boardVO">
-		SELECT * FROM boardtb
+		SELECT *
+		  FROM boardtb
 	</select>
-	 
+	
 	<select id="selectOneByBidx" resultType="boardVO" parameterType="int" >
-		SELECT * FROM boardtb WHERE bidx = #{bidx}
+		SELECT *
+		  FROM boardtb
+		 WHERE bidx = #{bidx}
 	</select>
 	
 	<update id="update" parameterType="boardVO">
 		UPDATE boardtb
 		   SET title = #{title} <!-- boardVO.getTitle() -->
-			 , body = #{body}
+		     , body = #{body}
 		 WHERE bidx = #{bidx}
 	</update>
 	
@@ -29,14 +32,23 @@
 	<insert id="insert" parameterType="boardVO">
 		INSERT INTO
 		boardtb(
-			title
+			 title
 			,body
 			,id
 		)VALUES(
-			#{title}
-		   ,#{body}
-		   ,#{id}
+			 #{title}
+			,#{body}
+			,#{id}
 		)
+		<selectKey order="AFTER" keyProperty="bidx" resultType="int">
+			SELECT MAX(bidx)
+		  	   FROM boardtb
+		</selectKey>
 	</insert>
-	
+	 
 </mapper>
+
+
+
+
+

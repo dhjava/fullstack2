@@ -13,13 +13,12 @@ public class BoardDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	public List<BoardVO> list() {
 		
 		return sqlSession.selectList("edu.springStudy.mapper.boardMapper.selectAll");
 	}
 	
-	// BoardMapper와 매칭
 	public BoardVO selectOneByBidx(int bidx) {
 		return sqlSession.selectOne("edu.springStudy.mapper.boardMapper.selectOneByBidx",bidx);
 	}
@@ -35,4 +34,7 @@ public class BoardDAO {
 	public int insert(BoardVO vo) {
 		return sqlSession.insert("edu.springStudy.mapper.boardMapper.insert", vo);
 	}
+	
+	
+	
 }

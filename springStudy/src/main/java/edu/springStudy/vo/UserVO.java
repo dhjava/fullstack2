@@ -80,12 +80,12 @@ public class UserVO {
 	public void setDelyn(String delyn) {
 		this.delyn = delyn;
 	}
+	
 	@Override
 	public String toString() {
 		return "UserVO [id=" + id + ", password=" + password + ", name=" + name + ", age=" + age + ", gender=" + gender
 				+ ", addr=" + addr + ", phone=" + phone + ", regdate=" + regdate + ", deldate=" + deldate + ", delyn="
-				+ delyn + ", grade=" + grade + "]";
+				+ delyn + "]";
 	}
-	
 	
 }

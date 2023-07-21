@@ -33,46 +33,33 @@ public class HomeController {
 		
 		String formattedDate = dateFormat.format(date);
 		
-		model.addAttribute("serverTime", "ë°˜ê°‘ìŠµë‹ˆë‹¤" ); //request.setAttribute()ì™€ ë™ì¼í•œ ì—­í• 
+		model.addAttribute("serverTime", "¹İ°©½À´Ï´Ù." ); //request.setAttribute()¿Í µ¿ÀÏÇÑ ¿ªÇÒ
 		
 		return "home";
 	}
 	
 	@RequestMapping(value="/sample.do",method=RequestMethod.GET)
-	public String sample(Model model) {
+	public String sample( Model model) {
 		
-		String name = "í™ê¸¸ë™";
+		String name = "È«±æµ¿";
 		int age = 20;
-		String addr = "ì „ì£¼ ë•ì§„êµ¬";
+		String addr = "ÀüÁÖ ´öÁø±¸";
 		String phone = "010-1111-1111";
 		
 		/*
-		ìœ„ ì •ë³´ 4ê°€ì§€ë¥¼ ex01.jspë¡œ í¬ì›Œë“œí•˜ì—¬ ì¶œë ¥í•˜ì„¸ìš”
+		 À§ Á¤º¸ 4°¡Áö¸¦ ex01.jsp·Î Æ÷¿öµåÇÏ¿© Ãâ·ÂÇÏ¼¼¿ä.
 		 */
-		model.addAttribute("name", name);
-		model.addAttribute("age", age);
-		model.addAttribute("addr", addr);
+		model.addAttribute("name" , name);
+		model.addAttribute("age"  , age);
+		model.addAttribute("addr" , addr);
 		model.addAttribute("phone", phone);
 		
 		return "ex01";
 	}
 	
-/*	@RequestMapping(value="/sample.do",method=RequestMethod.POST)
-	public String sample1(String name, String age, String addr, String phone) {
-		System.out.println("name :: " + name);
-		if(age != null && !age.equals("")) {
-			int a = Integer.parseInt(age);
-			System.out.println("age :: " + age);
-		}
-		System.out.println("addr :: " + addr);
-		System.out.println("phone :: " + phone);
-		return "";
-	}
-	*/
-	
-	
 	@RequestMapping(value="/sample.do",method=RequestMethod.POST)
 	public String sample1(UserVO userVO) {
+		
 		System.out.println(userVO.getName());
 		System.out.println(userVO.getAge());
 		System.out.println(userVO.getAddr());
@@ -80,5 +67,18 @@ public class HomeController {
 		
 		return "redirect:/board/list.do";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

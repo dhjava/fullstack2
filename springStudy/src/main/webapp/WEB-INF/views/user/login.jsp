@@ -11,11 +11,11 @@
 	<form action="login.do" method="post">
 		<table>
 			<tr>
-				<th align="right">id : </th>
+				<th align="right">id :</th>
 				<td><input type="text" name="id"></td>
 			</tr>
 			<tr>
-				<th align="right">password : </th>
+				<th align="right">password :</th>
 				<td><input type="password" name="password"></td>
 			</tr>
 		</table>

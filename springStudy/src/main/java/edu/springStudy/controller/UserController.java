@@ -19,45 +19,47 @@ import edu.springStudy.vo.UserVO;
 @RequestMapping(value="/user")
 @Controller
 public class UserController {
-	
+
 	@Autowired
 	private UserService userService;
+	
 	@Autowired
 	private BoardService boardService;
 	
-	@RequestMapping(value="/login.do", method=RequestMethod.GET)
+	@RequestMapping(value="/login.do",method=RequestMethod.GET)
 	public String login() {
 		return "user/login";
 	}
 	
-	@RequestMapping(value="/login.do", method=RequestMethod.POST)
-	public void login(UserVO vo, HttpServletRequest req, HttpServletResponse res) throws IOException {
+	@RequestMapping(value="/login.do",method=RequestMethod.POST)
+	public void login(UserVO vo,HttpServletRequest req, HttpServletResponse res) throws IOException {
 		
 		HttpSession session = req.getSession();
 		
 		UserVO loginVO = userService.selectUserByLogin(vo);
 		
-		/*
-		 ê° ë¡œê·¸ì¸ ì—¬ë¶€ ìƒí™©ì— ë§ê²Œ ì‚¬ìš©ìì—ê²Œ ê²½ê³ ì°½ì„ ë„ì›Œ ì•ˆë‚´í•˜ëŠ” ê¸°ëŠ¥ì„ êµ¬í˜„í•˜ì„¸ìš”
-		 */
 		res.setContentType("text/html;charset=UTF-8");
-		PrintWriter pw = res.getWriter();
-		
+		PrintWriter pw = res.getWriter();	
+		/*
+		 °¢ ·Î±×ÀÎ ¿©ºÎ »óÈ²¿¡ ¸Â°Ô »ç¿ëÀÚ¿¡°Ô °æ°íÃ¢À» ¶ç¿ö ¾È³»ÇÏ´Â ±â´ÉÀ» ±¸ÇöÇÏ¼¼¿ä
+		  
+		 */		
+		/*
+		 
+		 °Ô½Ã±Û »ó¼¼ÆäÀÌÁö¿¡¼­ ³»°¡ ¾´ ±ÛÀÎ °æ¿ì¿¡¸¸ °Ô½Ã±Û ¼öÁ¤,»èÁ¦¹öÆ° º¸ÀÌ°Ô ¼öÁ¤ÇÏ¼¼¿ä
+		 
+		 */
 		if(loginVO != null) {
-			// loginí•  íšŒì›ì´ ë°ì´í„°ë² ì´ìŠ¤ì— ì¡´ì¬
-			System.out.println("íšŒì›ì¡´ì¬");
+			//loginÇÒ È¸¿øÀÌ µ¥ÀÌÅÍº£ÀÌ½º¿¡ Á¸Àç
+			System.out.println("È¸¿øÁ¸Àç");
 			
 			session.setAttribute("login", loginVO);
-			
-			pw.append("<script>alert('ë¡œê·¸ì¸ì´ ë˜ì—ˆìŠµë‹ˆë‹¤.');loaction.href='"+req.getContextPath()+"/';</script>");
-			
+			pw.append("<script>alert('·Î±×ÀÎ¿¡ ¼º°øÇß½À´Ï´Ù.');location.href='"+req.getContextPath()+"/';</script>");
 			
 		}else {
-			// loginí•  íšŒì›ì´ ë°ì´í„°ë² ì´ìŠ¤ì— ì¡´ì¬X
-			System.out.println("íšŒì›ì¡´ì¬X");
-			
-			pw.append("<script>alert('ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì•„ì´ë””ë‚˜ ë¹„ë°€ë²ˆí˜¸ì…ë‹ˆë‹¤.');loaction.href='"+req.getContextPath()+"/';</script>");
-			
+			//loginÇÒ È¸¿øÀÌ µ¥ÀÌÅÍº£ÀÌ½º¿¡ Á¸Àç X
+			System.out.println("È¸¿øÁ¸Àç X");
+			pw.append("<script>alert('·Î±×ÀÎ¿¡ ½ÇÆĞÇß½À´Ï´Ù.');location.href='"+req.getContextPath()+"/user/login.do';</script>");
 		}
 		
 		pw.flush();
@@ -65,53 +67,29 @@ public class UserController {
 	
 	@RequestMapping(value="/logout.do")
 	public void logout(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		
 		res.setContentType("text/html;charset=UTF-8");
 		PrintWriter pw = res.getWriter();
 		
 		try {
-		HttpSession session = req.getSession();
-		session.invalidate();
-		
-		pw.append("<script>alert('ë¡œê·¸ì•„ì›ƒ ë˜ì—ˆìŠµë‹ˆë‹¤.');" + "location.href='" + req.getContextPath()+"/';</script>");
+			HttpSession session = req.getSession();
+			session.invalidate();
+			
+			pw.append("<script>alert('·Î±×¾Æ¿ô µÇ¾ú½À´Ï´Ù.');"
+						+"location.href='"
+					    +req.getContextPath()+"/';</script>");
+			
 		}catch(Exception e) {
 			e.printStackTrace();
-			pw.append("<script>alert('ë¡œê·¸ì•„ì›ƒ ì‹œ ì˜ˆì™¸ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤.');" + "location.href='" + req.getContextPath()+"/';</script>");
-		}
-		pw.flush();
-	}
-	
-	@RequestMapping(value="/join.do", method=RequestMethod.GET)
-	public String join() {
-		return "user/join";
-	}
-	
-	@RequestMapping(value="/join.do", method=RequestMethod.POST)
-	public void join(UserVO vo, HttpServletRequest req, HttpServletResponse res) throws IOException {
-		
-		HttpSession session = req.getSession();
-		
-		UserVO joinVO = userService.selectUserByJoin(vo);
-		
-		res.setContentType("text/html;charset=UTF-8");
-		PrintWriter pw = res.getWriter();
-		
-		if(joinVO > 0) {
-			// loginí•  íšŒì›ì´ ë°ì´í„°ë² ì´ìŠ¤ì— ì¡´ì¬
-			System.out.println("íšŒì›ê°€ì… ì™„ë£Œ");
-			
-			session.setAttribute("join", joinVO);
-			
-			pw.append("<script>alert('ê°€ì…ì„ ì¶•í•˜ë“œë¦½ë‹ˆë‹¤.');loaction.href='"+req.getContextPath()+"/';</script>");
-			
-			
-		}else {
-			// loginí•  íšŒì›ì´ ë°ì´í„°ë² ì´ìŠ¤ì— ì¡´ì¬X
-			System.out.println("íšŒì›ê°€ì… ì‹¤íŒ¨");
-			
-			pw.append("<script>alert('ê°€ì…ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.');loaction.href='"+req.getContextPath()+"/';</script>");
-			
+			pw.append("<script>alert('·Î±×¾Æ¿ô½Ã ¿¹¿Ü°¡ ¹ß»ıÇß½À´Ï´Ù.');"
+					+"location.href='"
+				    +req.getContextPath()+"/';</script>");
 		}
 		
 		pw.flush();
+		
 	}
+	
+	
+	
 }
