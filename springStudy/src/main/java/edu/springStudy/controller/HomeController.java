@@ -68,8 +68,10 @@ public class HomeController {
 		return "redirect:/board/list.do";
 	}
 	
-	
-	
+	@RequestMapping(value="/fileupload.do", method=RequestMethod.GET)
+	public String fileupload() {
+		return "fileupload";
+	}
 	
 	
 	

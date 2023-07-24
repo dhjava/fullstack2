@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.springStudy.service.BoardService;
 import edu.springStudy.service.UserService;
@@ -92,6 +93,35 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping(value="/join.do", method=RequestMethod.GET)
+	public String join() {
+		return "user/join";
+	}
 	
+	@RequestMapping(value="/checkId.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String checkId(String id) {
+		int result = userService.selectCntById(id);
+		
+		return result+"";
+	}
 	
+	@RequestMapping(value="/join.do", method=RequestMethod.POST)
+	public String join(UserVO vo, String ageStr) {
+		
+		// 화면에서 age가 null로 넘어오는 경우 vo에 매핑되지 않기 때문에
+		if(ageStr != null && !ageStr.equals("")) {
+			vo.setAge(Integer.parseInt(ageStr));
+		}
+		
+		int result = userService.insert(vo);
+		
+		if(result>0) {
+			System.out.println("회원가입 성공");
+		}else {
+			System.out.println("회원가입 실패");
+		}
+		
+		return "redirect:login.do";
+	}
 }

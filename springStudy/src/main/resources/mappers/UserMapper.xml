@@ -13,10 +13,38 @@
 		 WHERE id = #{id}
 		   AND password = #{password}
 	</select>
-	
-	<select id="" parameterType="String" resultType="int">
+	<!-- 
+		dao에서 sqlSession객체의 
+		selectOne 메소드를 호출하면 되고
+		그의 결과 타입은 int 이다.
+	 -->
+	<select id="selectCntById" 
+	     parameterType="String" 
+	     resultType="int">
 		select count(id)
-		from usertb
-		where id = ?;
+		  from usertb
+		 where id = #{id}
 	</select>
+	
+	<insert id = "insert" parameterType="userVO">
+		INSERT INTO usertb(
+			 id
+			,password
+			,name
+			,gender
+			,addr
+			,phone
+			,age
+			,grade
+		)values(
+			 #{id}
+			,#{password}
+			,#{name}
+			,#{gender}
+			,#{addr}
+			,#{phone}
+			,#{age}
+			,'C'
+		)
+	</insert>
 </mapper>
